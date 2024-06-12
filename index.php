@@ -16,7 +16,10 @@
 		<link rel="stylesheet" href="./assets/css/magnific-popup.min.css">
 		<link rel="stylesheet" href="./assets/css/style.css">
 		<link rel="stylesheet" href="./assets/css/responsive.css">
-		
+		<link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
 		<!-- Favicon -->
 		<link rel="icon" type="image/png" href="./assets/images/favicon.png">
 		<!-- Title -->

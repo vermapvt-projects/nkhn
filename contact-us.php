@@ -1,12 +1,12 @@
 <?php
 include "includes/config.php";
 if (isset($_POST['submit'])) {
-	$name = mysqli_escape_string($conn, $_POST['name']);
-	$name = htmlspecialchars($name);
+	$Mainname = mysqli_escape_string($conn, $_POST['name']);
+	$name = htmlspecialchars($Mainname);
 	$name = encrypt_decrypt('encrypt', $name, $enckey);
 
-	$email = mysqli_escape_string($conn, $_POST['email']);
-	$email = htmlspecialchars($email);
+	$Mainemail = mysqli_escape_string($conn, $_POST['email']);
+	$email = htmlspecialchars($Mainemail);
 	$email = encrypt_decrypt('encrypt', $email, $enckey);
 
 	$phone = mysqli_escape_string($conn, $_POST['phone_number']);
@@ -27,7 +27,25 @@ if(mysqli_num_rows($crossCheck) > 0){
 }else{
 
 	mysqli_query($conn, "INSERT INTO leads (name,email,phone_number,data) VALUES ('$name','$email', '$phone', '$message');");
+	// To Admin
+	sendEmail("info@nkhn.nl", $Mainname, "New Lead Recieved from $Mainname", "
+		Hello Sander,<br>
+		We've recived a new inquiry for security services at NKHN Security. Kindly login into the Secure Dashboard to Check the details.
+		<br>
+		<a href='https://security.nkhn.nl/nkhnpanel/login.php'>Click Here to Login</a>
+		", "altbody");
 
+	// To User
+	sendEmail($Mainemail, $Mainname, "Thanks for choosing us @$Mainname", "
+		Hello $Mainname,<br>
+		We've recived your inquiry for security services at NKHN Security. One of our associates will get in touch with you shortly. Thanks for choosing us.
+		<br><br>
+		--<br>
+		Thanks & Regards,<br>
+		Sander Ruitenbeek<br>
+		Chief Executive Officer<br>
+		NKHN Security<br>
+		", "altbody");
 }
 }
 
